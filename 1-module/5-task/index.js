@@ -3,6 +3,6 @@ function truncate(str, maxlength) {
     return str
   }
   else {
-    return str.slice(0, maxlength -1) + "...";
+    return str.slice(0, maxlength -1) + "…";
   }
 }
