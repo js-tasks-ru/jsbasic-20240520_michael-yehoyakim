@@ -25,9 +25,9 @@ function highlight(table) {
     // handle Gender
     genderElement = row.cells[2];
     if (genderElement.textContent === "m") {
-      row.className = "male";
+      row.classList.add("male");
     } else {
-      row.className = "female";
+      row.classList.add("female");
     }
 
     // handle Status
