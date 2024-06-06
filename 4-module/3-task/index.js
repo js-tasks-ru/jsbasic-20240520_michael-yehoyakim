@@ -34,10 +34,10 @@ function highlight(table) {
     statusElement = row.cells[3];
     if (statusElement.hasAttribute("data-available")) {
       if (statusElement.dataset.available === "true") {
-        row.className = "available";
+        row.classList.add("available");
       }
       else {
-        row.className = "unavailable";
+        row.classList.add("unavailable");
       }
     }
     else {
