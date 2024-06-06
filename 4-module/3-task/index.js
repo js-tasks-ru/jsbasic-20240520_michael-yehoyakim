@@ -1,6 +1,6 @@
 function highlight(table) {
   // do stuff for Age (index 1)
-  const tbody = document.body.querySelector("tbody");
+  const tbody = table.querySelector("tbody");
 
   const rows = tbody.rows;
 
