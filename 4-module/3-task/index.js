@@ -19,29 +19,29 @@ function highlight(table) {
     age = parseInt(ageElement.textContent, 10) || 0;
 
     if (age < 18) {
-      ageElement.style.textDecoration = "line-through";
+      row.style.textDecoration = "line-through";
     }
 
     // handle Gender
     genderElement = row.cells[2];
     if (genderElement.textContent === "m") {
-      genderElement.className = "male";
+      row.className = "male";
     } else {
-      genderElement.className = "female";
+      row.className = "female";
     }
 
     // handle Status
     statusElement = row.cells[3];
     if (statusElement.hasAttribute("data-available")) {
       if (statusElement.dataset.available === "true") {
-        statusElement.className = "available";
+        row.className = "available";
       }
       else {
-        statusElement.className = "unavailable";
+        row.className = "unavailable";
       }
     }
     else {
-      statusElement.hidden = true;
+      row.hidden = true;
     }
   }
 }
