@@ -1,9 +1,4 @@
 function initCarousel() {
-  // need to get the inner carusel element
-  // need to get the left and right buttons
-
-  // need to check what transform position the inner is
-  // offsetwidth is 988, if transform on 988 - hide left button, if it's 988 + 3*988, hide right button
   const numberOfSlides = 4;
 
   const innerCarouselElement = document.body.querySelector(".carousel__inner");
