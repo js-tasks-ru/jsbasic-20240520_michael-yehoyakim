@@ -43,16 +43,15 @@ export default class ProductCard {
   }
 
   onClickAddToCard = (event) => {
-    if (event.target.parentElement.className != 'card__button') {
-      return;
-    }
+    let button = event.target.closest('.card__button');
+    if (!button) return;
 
     const addProductEvent = new CustomEvent('product-add', {
       detail: this.id,
       bubbles: true
     });
 
-    event.target.dispatchEvent(addProductEvent);
+    this.elem.dispatchEvent(addProductEvent);
 
   }
 
