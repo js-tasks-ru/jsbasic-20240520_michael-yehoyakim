@@ -52,7 +52,7 @@ export default class ProductCard {
       bubbles: true
     });
 
-    this.elem.dispatchEvent(addProductEvent);
+    event.target.dispatchEvent(addProductEvent);
 
   }
 
