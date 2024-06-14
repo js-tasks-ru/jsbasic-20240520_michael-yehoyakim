@@ -47,6 +47,8 @@ export default class Carousel {
     this.elem = createElement(this.template());
     this.initCarousel();
 
+    this.elem.addEventListener('click', this.onclickCarouselButton);
+
     return this.elem;
   }
 
@@ -59,6 +61,8 @@ export default class Carousel {
       detail: slideElement.dataset.id,
       bubbles: true
     });
+
+    this.elem.dispatchEvent(addProductEvent);
   }
 
   initCarousel() {
