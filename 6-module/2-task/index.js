@@ -43,7 +43,7 @@ export default class ProductCard {
   }
 
   onClickAddToCard (event) {
-    if (event.target.className != 'card__button') {
+    if (event.target.parentElement.className != 'card__button') {
       return;
     }
 
@@ -52,7 +52,7 @@ export default class ProductCard {
       bubbles: true
     });
 
-    this.elem.dispatchEvent(addProductEvent);
+    this.dispatchEvent(addProductEvent);
 
   }
 
