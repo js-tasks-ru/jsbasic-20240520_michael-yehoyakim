@@ -52,7 +52,7 @@ export default class Carousel {
     return this.elem;
   }
 
-  onclickCarouselButton (event) {
+  onclickCarouselButton =  (event) => {
     const carouselButton = event.target.closest('.carousel__button');
     const slideElement = event.target.closest('carousel__slide');
     if (!carouselButton || !slideElement) return;
@@ -63,7 +63,7 @@ export default class Carousel {
     });
 
     this.elem.dispatchEvent(addProductEvent);
-  }
+  };
 
   initCarousel() {
 
