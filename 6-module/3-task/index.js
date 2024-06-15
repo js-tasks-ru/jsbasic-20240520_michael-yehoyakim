@@ -54,7 +54,7 @@ export default class Carousel {
 
   onclickCarouselButton =  (event) => {
     const carouselButton = event.target.closest('.carousel__button');
-    const slideElement = event.target.closest('carousel__slide');
+    const slideElement = event.target.closest('.carousel__slide');
     if (!carouselButton || !slideElement) return;
 
     const addProductEvent = new CustomEvent("product-add", {
