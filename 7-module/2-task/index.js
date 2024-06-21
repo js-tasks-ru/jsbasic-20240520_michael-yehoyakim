@@ -53,14 +53,11 @@ export default class Modal {
   setBody(node) {
     const modalBodyElement = this.elem.querySelector('.modal__body');
     modalBodyElement.innerHTML = "";
-    modalBodyElement.append(node)
+    modalBodyElement.append(node);
   }
 
   removeModal() {
-    let modalNode = document.body.querySelector('.modal');
-    if (modalNode) {
-      modalNode.remove();
-    }
+    this.elem.remove();
     document.body.classList.remove('is-modal-open');
   }
 
