@@ -52,12 +52,8 @@ export default class Modal {
 
   setBody(node) {
     const modalBodyElement = this.elem.querySelector('.modal__body');
-    if (modalBodyElement.firstChild) {
-      modalBodyElement.replaceChild(node, modalBodyElement.firstChild);
-    }
-    else {
-      modalBodyElement.appendChild(node);
-    }
+    modalBodyElement.innerHTML = "";
+    modalBodyElement.append(node)
   }
 
   removeModal() {
