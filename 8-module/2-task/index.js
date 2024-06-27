@@ -16,11 +16,7 @@ export default class ProductGrid {
   }
 
   updateFilter(filters) {
-    for (let key in this.filters) {
-      if (key in filters) {
-        this.filters[key] = filters[key];
-      }
-    }
+    this.filters = Object.assign(this.filters, filters);
 
     let filteredGrid = this.products;
 
@@ -34,7 +30,7 @@ export default class ProductGrid {
       filteredGrid = filteredGrid.filter(product => product.spiciness <= this.filters.maxSpiciness);
     }
     if (this.filters.vegeterianOnly) {
-      filteredGrid = filteredGrid.filter(product => product.vegeterian === true);
+      filteredGrid = filteredGrid.filter(product => product.vegeterian);
     }
 
     this.products = filteredGrid;
@@ -47,14 +43,17 @@ export default class ProductGrid {
 
     const htmlSuffix = '</div></div>';
 
-    const productsHtml = this.products.map(product => new ProductCard(product).elem.outerHTML).join('');
-
-    return htmlPrefix + productsHtml+ htmlSuffix;
+    return htmlPrefix + htmlSuffix;
 
   }
 
   render() {
     this.elem = createElement(this.template());
+    let productsGrid = this.elem.querySelector('.products-grid__inner');
+    for (let product of this.products) {
+      let renderedProduct = new ProductCard(product);
+      productsGrid.append(renderedProduct.elem);
+    }
     return this.elem;
   }
 }
