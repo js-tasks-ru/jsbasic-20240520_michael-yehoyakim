@@ -200,7 +200,8 @@ export default class Cart {
         }
         this.cartItems = [];
 
-        document.querySelector('.modal__body').innerHTML = `
+        if (document.querySelector('.modal__body')) {
+          document.querySelector('.modal__body').innerHTML = `
           <div class="modal__body-inner">
             <p>
               Order successful! Your order is being cooked :) <br>
@@ -209,6 +210,7 @@ export default class Cart {
             </p>
           </div>
         `;
+        }
       }
     });
   };
