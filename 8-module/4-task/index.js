@@ -191,7 +191,9 @@ export default class Cart {
 
     promise.then((response) => {
       if (response.status === 200) {
-        document.querySelector('.modal__title').textContent = 'Success!';
+        if(document.querySelector('.modal__title')) {
+          document.querySelector('.modal__title').textContent = 'Success!';
+        }
 
         for (let i=0; i<this.cartItems.length; i++){
           delete this.cartItems[i];
