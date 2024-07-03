@@ -1,51 +1,19 @@
 import Carousel from '../../6-module/3-task/index.js';
 import slides from '../../6-module/3-task/slides.js';
-
 import RibbonMenu from '../../7-module/1-task/index.js';
 import categories from '../../7-module/1-task/categories.js';
-
 import StepSlider from '../../7-module/4-task/index.js';
 import ProductsGrid from '../../8-module/2-task/index.js';
+import createElement from '../../assets/lib/create-element.js';
 
 import CartIcon from '../../8-module/1-task/index.js';
 import Cart from '../../8-module/4-task/index.js';
-import createElement from "../../assets/lib/create-element";
 
 export default class Main {
   elem = null;
 
   constructor() {
     this.elem = this.render();
-  }
-
-  async render() {
-    let mainElement = createElement(this.template());
-
-    let carousel = new Carousel(slides);
-    let ribbonMenu = new RibbonMenu(categories);
-    let stepSlider = new StepSlider(5, -3);
-    let cartIcon = new CartIcon();
-    let cart = new Cart(cartIcon);
-
-    mainElement.querySelector('[data-carousel-holder]').append(carousel.elem);
-    mainElement.querySelector('[data-ribbon-holder]').append(ribbonMenu.elem);
-    mainElement.querySelector('[data-slider-holder]').append(stepSlider.elem);
-    mainElement.querySelector('[data-cart-icon-holder]').append(cartIcon.elem);
-
-    let response = fetch('products.json', {
-      method: 'GET'
-    });
-
-    let json = await response.json;
-    let products = JSON.parse(json);
-
-    mainElement.querySelector('[data-products-grid-holder]').innerHTML = '';
-
-    let productGrid = new ProductsGrid(products);
-    mainElement.querySelector('[data-products-grid-holder]').append(productGrid.elem);
-
-    return mainElement;
-
   }
 
   template() {
@@ -114,6 +82,34 @@ export default class Main {
     `;
 
     return mainHTML;
+  }
+
+  async render() {
+    let mainElement = createElement(this.template());
+
+    let carousel = new Carousel(slides);
+    let ribbonMenu = new RibbonMenu(categories);
+    let stepSlider = new StepSlider(5, -3);
+    let cartIcon = new CartIcon();
+    let cart = new Cart(cartIcon);
+
+    document.querySelector('[data-carousel-holder]').append(carousel.elem);
+    document.querySelector('[data-ribbon-holder]').append(ribbonMenu.elem);
+    document.querySelector('[data-slider-holder]').append(stepSlider.elem);
+    document.querySelector('[data-cart-icon-holder]').append(cartIcon.elem);
+
+    let response = await fetch('products.json', {
+      method: 'GET'
+    });
+
+    let products = await response.json();
+
+    document.querySelector('[data-products-grid-holder]').innerHTML = '';
+
+    let productGrid = new ProductsGrid(products);
+    document.querySelector('[data-products-grid-holder]').append(productGrid.elem);
+
+    return mainElement;
   }
 
 }
