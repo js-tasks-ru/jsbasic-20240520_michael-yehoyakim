@@ -125,13 +125,13 @@ export default class Main {
       }
     });
 
-    stepSlider.elem.addEventListener('slider-change', (event) => {
+    document.body.addEventListener('slider-change', (event) => {
       productsGrid.updateFilter({
         maxSpiciness: event.detail
       });
     });
 
-    ribbonMenu.elem.addEventListener('ribbon-select', (event) => {
+    document.body.addEventListener('ribbon-select', (event) => {
       productsGrid.updateFilter({
         category: event.detail
       });
