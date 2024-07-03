@@ -106,8 +106,53 @@ export default class Main {
 
     document.querySelector('[data-products-grid-holder]').innerHTML = '';
 
-    let productGrid = new ProductsGrid(products);
-    document.querySelector('[data-products-grid-holder]').append(productGrid.elem);
+    let productsGrid = new ProductsGrid(products);
+
+    productsGrid.updateFilter({
+      noNuts: document.getElementById('nuts-checkbox').checked,
+      vegeterianOnly: document.getElementById('vegeterian-checkbox').checked,
+      maxSpiciness: stepSlider.value,
+      category: ribbonMenu.value
+    });
+
+    document.querySelector('[data-products-grid-holder]').append(productsGrid.elem);
+
+    // handle click events
+    document.body.addEventListener('product-add', (event) => {
+      const product = products.find(p => p.id === event.detail);
+      if (product) {
+        cart.addProduct(product);
+      }
+    });
+
+    stepSlider.elem.addEventListener('slider-change', (event) => {
+      productsGrid.updateFilter({
+        maxSpiciness: event.detail
+      });
+    });
+
+    ribbonMenu.elem.addEventListener('ribbon-select', (event) => {
+      productsGrid.updateFilter({
+        category: event.detail
+      });
+    });
+
+    document.body.addEventListener('change', (event) => {
+      let nutsChange = document.getElementById('nuts-checkbox');
+      let vegeterianChange = document.getElementById('vegeterian-checkbox');
+
+      if (event.target === nutsChange) {
+        productsGrid.updateFilter({
+          noNuts: nutsChange.checked
+        });
+      }
+
+      if (event.target === vegeterianChange) {
+        productsGrid.updateFilter({
+          vegeterianOnly: vegeterianChange.checked
+        });
+      }
+    });
 
     return mainElement;
   }
