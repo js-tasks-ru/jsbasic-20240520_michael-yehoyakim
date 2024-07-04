@@ -2,9 +2,8 @@ import createElement from '../../assets/lib/create-element.js';
 import ProductCard from '../../6-module/2-task/index.js';
 
 export default class ProductGrid {
-  elem = null
-
   constructor(products) {
+    this.filteredProducts = products; // Keep the original list of products
     this.products = products;
     this.filters = {
       noNuts: false,
@@ -18,42 +17,42 @@ export default class ProductGrid {
   updateFilter(filters) {
     this.filters = Object.assign(this.filters, filters);
 
-    let filteredGrid = this.products;
+    this.filteredProducts = this.products;
 
     if (this.filters.category) {
-      filteredGrid = filteredGrid.filter(product => product.category === this.filters.category);
+      this.filteredProducts = this.filteredProducts.filter(product => product.category === this.filters.category);
     }
     if (this.filters.noNuts) {
-      filteredGrid = filteredGrid.filter(product => ("nuts" in product && !product.nuts) || !("nuts" in product));
+      this.filteredProducts = this.filteredProducts.filter(product => !product.nuts);
     }
     if (this.filters.maxSpiciness) {
-      filteredGrid = filteredGrid.filter(product => product.spiciness <= this.filters.maxSpiciness);
+      this.filteredProducts = this.filteredProducts.filter(product => product.spiciness <= this.filters.maxSpiciness);
     }
     if (this.filters.vegeterianOnly) {
-      filteredGrid = filteredGrid.filter(product => product.vegeterian);
+      this.filteredProducts = this.filteredProducts.filter(product => product.vegeterian);
     }
 
-    this.products = filteredGrid;
-    this.elem = this.render();
+    this.renderProducts();
   }
 
   template() {
-    const htmlPrefix = `<div class="products-grid">
-                            <div class="products-grid__inner">`;
-
-    const htmlSuffix = '</div></div>';
-
-    return htmlPrefix + htmlSuffix;
-
+    return `<div class="products-grid">
+              <div class="products-grid__inner"></div>
+            </div>`;
   }
 
   render() {
     this.elem = createElement(this.template());
+    this.renderProducts();
+    return this.elem;
+  }
+
+  renderProducts() {
     let productsGrid = this.elem.querySelector('.products-grid__inner');
-    for (let product of this.products) {
+    productsGrid.innerHTML = '';
+    for (let product of this.filteredProducts) {
       let renderedProduct = new ProductCard(product);
       productsGrid.append(renderedProduct.elem);
     }
-    return this.elem;
   }
 }
